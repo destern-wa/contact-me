@@ -1,0 +1,25 @@
+li.selected {
+    font-weight: bold;
+    color: darkblue;
+}
+
+h1 {
+    margin-left: 0.5rem;
+}
+
+button {
+    width: 6em !important;
+    margin: 1em !important;
+}
+
+/* Hidden text that is available for screen readers/accessibility,
+   based on https://webaim.org/techniques/css/invisiblecontent/
+*/
+.hidden {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
