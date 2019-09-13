@@ -4,6 +4,7 @@ import {faAddressBook, faAddressCard} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "./App.css";
 import AppHeader from "./Components/AppHeader";
+import ContactsList from "./Components/ContactsList";
 
 export default class App extends Component {
   state = {};
@@ -130,18 +131,16 @@ export default class App extends Component {
   };
 
   render() {
-    const contactListItems = this.state.contacts.map(this.createContactListItems);
     return (
       <Container>
         <AppHeader />
         <main>
           <Row>
-            <Col xs="12" sm="4">
-              <h2>Contacts</h2>
-              <ListGroup className="theList">
-                {contactListItems}
-              </ListGroup>
-            </Col>
+            <ContactsList
+              contacts={this.state.contacts}
+              showContact={this.showContact}
+              selectedItemId={this.state.selectedItemId}
+            />
             <Col xs="12" sm="8">
               <h2>{this.state.formHeading}</h2>
               <Form onSubmit={this.onFormSubmit}>
