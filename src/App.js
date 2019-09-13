@@ -3,6 +3,8 @@ import { Row, Col, Container, Label, ListGroup, ListGroupItem, Form, FormGroup, 
 import {faAddressBook, faAddressCard} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "./App.css";
+import AppHeader from "./Components/AppHeader";
+
 export default class App extends Component {
   state = {};
 
@@ -131,9 +133,7 @@ export default class App extends Component {
     const contactListItems = this.state.contacts.map(this.createContactListItems);
     return (
       <Container>
-        <header className="App-header bg-dark text-light">
-          <h1><FontAwesomeIcon icon={faAddressBook} />&nbsp;Contact Me</h1>
-        </header>
+        <AppHeader />
         <main>
           <Row>
             <Col xs="12" sm="4">
