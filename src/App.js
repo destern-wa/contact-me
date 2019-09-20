@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import { Row, Col, Container, Label, ListGroup, ListGroupItem, Form, FormGroup, Input, Button } from "reactstrap";
-import {faAddressBook, faAddressCard} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Row, Col, Container } from "reactstrap";
 import "./App.css";
 import AppHeader from "./Components/AppHeader";
 import ContactsList from "./Components/ContactsList";
+import ContactDetails from "./Components/ContactDetails";
 
 export default class App extends Component {
   state = {};
@@ -73,6 +72,7 @@ export default class App extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
+    console.log("FORM SUBMITTED");
 
     if (this.state.selectedItemId) {
       this.editContact();
@@ -83,6 +83,7 @@ export default class App extends Component {
 
   onFormCancel = e => {
     e.preventDefault();
+    console.log("FORM CANCELLED");
     this.setState({
       currentItem: {id: Date.now()},
       selectedItemId: null,
@@ -116,20 +117,6 @@ export default class App extends Component {
     }
   };
 
-  createContactListItems = contact => {
-    return (
-      <ListGroupItem
-        key={contact.id}
-        onClick={() => this.showContact(contact.id)}
-        active={this.state.selectedItemId === contact.id}
-      >
-        <FontAwesomeIcon icon={faAddressCard} />&nbsp;
-        {contact.name}
-
-      </ListGroupItem>
-    )
-  };
-
   render() {
     return (
       <Container>
@@ -141,112 +128,13 @@ export default class App extends Component {
               showContact={this.showContact}
               selectedItemId={this.state.selectedItemId}
             />
-            <Col xs="12" sm="8">
-              <h2>{this.state.formHeading}</h2>
-              <Form onSubmit={this.onFormSubmit}>
-                <FormGroup row>
-                  <Label for="contactName" sm={4} xs={12}>Name</Label>
-                  <Col>
-                    <Input id="contactName" name="name"
-                      type="text" placeholder="Contact name"
-                      onChange={e=>this.handleInput("name", e.target.value)}
-                      value={this.state.currentItem.name || ''}
-                      // ref={this.props.InputElement}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactAddress" sm={4} xs={12}>Address</Label>
-                  <Col>
-                    <Input id="contactAddress" name="addressLine1"
-                           type="text" placeholder="Address line 1"
-                           onChange={e=>this.handleInput("addressLine1", e.target.value)}
-                           value={this.state.currentItem.addressLine1 || ''}
-                      // value={this.props.currentItem.text}
-                      // ref={this.props.InputElement}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactAddressLine2" className="hidden" sm={4} xs={12}>Address line 2</Label>
-                  <Col>
-                    <Input id="contactAddressLine2" name="addressLine2"
-                           type="text" placeholder="Address line 2"
-                           onChange={e=>this.handleInput("addressLine2", e.target.value)}
-                           value={this.state.currentItem.addressLine2 || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactSuburb" sm={4} xs={12}>Suburb</Label>
-                  <Col>
-                    <Input id="contactSuburb" name="suburb"
-                           type="text" placeholder="Suburb"
-                           onChange={e=>this.handleInput("suburb", e.target.value)}
-                           value={this.state.currentItem.suburb || ''}
-                      // value={this.props.currentItem.text}
-                      // ref={this.props.InputElement}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactState" sm={4} xs={12}>State</Label>
-                  <Col>
-                    <Input id="contactState" name="state"
-                           type="text" placeholder="State"
-                           onChange={e=>this.handleInput("state", e.target.value)}
-                           value={this.state.currentItem.state || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactCountry" sm={4} xs={12}>Country</Label>
-                  <Col>
-                    <Input id="contactCountry" name="country"
-                           type="text" placeholder="Country"
-                           onChange={e=>this.handleInput("country", e.target.value)}
-                           value={this.state.currentItem.country || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactEmail" sm={4} xs={12}>Email</Label>
-                  <Col>
-                    <Input id="contactEmail" name="email"
-                           type="email" placeholder="user@email.domain"
-                           onChange={e=>this.handleInput("email", e.target.value)}
-                           value={this.state.currentItem.email || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactPhone" sm={4} xs={12}>Phone</Label>
-                  <Col>
-                    <Input id="contactPhone" name="phone"
-                           type="text" placeholder=""
-                           onChange={e=>this.handleInput("phone", e.target.value)}
-                           value={this.state.currentItem.phone || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="contactMobile" sm={4} xs={12}>Mobile</Label>
-                  <Col>
-                    <Input id="contactMobile" name="mobile"
-                           type="text" placeholder=""
-                           onChange={e=>this.handleInput("mobile", e.target.value)}
-                           value={this.state.currentItem.mobile || ''}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Col style={{textAlign:"center"}}>
-                    <Button outline color="danger" type="cancel" id="btnCancel" value="Cancel" onClick={this.onFormCancel}>Cancel</Button>
-                    <Button color="primary" type="submit" id="btnSave" value="Save">Save</Button>
-                  </Col>
-                </FormGroup>
-              </Form>
-            </Col>
+          <ContactDetails
+            formHeading = {this.state.formHeading}
+            currentItem = {this.state.currentItem}
+            onFormSubmit = {this.onFormSubmit}
+            onFormCancel = {this.onFormCancel}
+            handleInput = {this.handleInput}
+          />
           </Row>
         </main>
         <footer>

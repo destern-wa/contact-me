@@ -1,5 +1,5 @@
 import React from "react";
-import {Col, ListGroup, ListGroupItem, Row} from "reactstrap";
+import {Col, ListGroup, ListGroupItem} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressCard} from "@fortawesome/free-solid-svg-icons";
 
