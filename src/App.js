@@ -92,7 +92,7 @@ export default class App extends Component {
   };
 
   handleInput = (prop, val) => {
-    let item  = JSON.parse(JSON.stringify(this.state.currentItem));
+    let item  = this.state.currentItem;
     item[prop] = val;
     this.setState( {
         currentItem: item
